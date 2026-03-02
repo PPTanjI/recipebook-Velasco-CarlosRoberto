@@ -4,8 +4,26 @@
     <title>Recipe Book</title>
 </head>
 <body>
+
+<header>
     <h1>Recipe Book</h1>
-    <hr>
-    {% block content %}{% endblock %}
+
+    {% if user.is_authenticated %}
+        <form action="{% url 'logout' %}" method = 'post'>
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+</header>
+
+<hr>
+
+<h2>{% block page_heading %}{% endblock %}</h2>
+    
+{% block content %}
+{% endblock %}
+
 </body>
 </html>
