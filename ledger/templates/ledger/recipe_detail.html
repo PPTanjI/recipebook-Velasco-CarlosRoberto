@@ -11,7 +11,33 @@
 <p><strong>Updated:</strong> {{ recipe.updated_on }}</p>
 
 <h3>Ingredients</h3>
+
+<ul>
 {% for item in recipe.ingredients.all %}
-    <p>{{ item.ingredient.name }} - {{ item.quantity }}</p>
+    <li>
+        {{ item.ingredient.name }} - {{ item.quantity }}
+    </li>
 {% endfor %}
+</ul>
+
+<h3>Images</h3>
+
+{% for image in recipe.images.all %}
+    <img src="{{ image.image.url }}" alt="{{ image.description }}" width="300">
+{% empty %}
+    <p>No images uploaded.</p>
+{% endfor %}
+
+{% if user.is_authenticated %}
+<p>
+    <a href="{% url 'add_image' recipe.pk %}">
+        Upload Image
+    </a>
+</p>
+{% endif %}
+
+<p>
+    <a href="{% url 'recipe_list' %}">Back to Recipe List</a>
+</p>
+
 {% endblock %}

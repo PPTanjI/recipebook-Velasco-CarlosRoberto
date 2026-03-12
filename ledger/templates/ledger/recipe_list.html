@@ -14,4 +14,11 @@ Recipe List
         </li>
     {% endfor %}
 </ul>
+
+{% if user.is_authenticated %}
+    <p>
+        <a href="{% url 'recipe_add' %}">Add Recipe</a>
+    </p>
+{% endif %}
+
 {% endblock %}
